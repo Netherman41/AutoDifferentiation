@@ -156,21 +156,21 @@ namespace multiVarDiff {
 
 	// global operators with floats
 	template <ExprType exprType, typename... Ts>
-	constexpr auto operator+(const Expression<exprType, Ts...>& lhs, float rhs) { return Expression<ExprType::Sum, Expression<exprType, Ts...>, Expression<ExprType::Constant>>{lhs, rhs}; }
+	constexpr auto operator+(const Expression<exprType, Ts...>& lhs, float rhs) { return Expression<ExprType::Sum, Expression<exprType, Ts...>, Constant>{lhs, rhs}; }
 	template <ExprType exprType, typename... Ts>
-	constexpr auto operator+(float lhs, const Expression<exprType, Ts...>& rhs) { return Expression<ExprType::Sum, Expression<ExprType::Constant>, Expression<exprType, Ts...>>{lhs, rhs}; }
+	constexpr auto operator+(float lhs, const Expression<exprType, Ts...>& rhs) { return Expression<ExprType::Sum, Constant, Expression<exprType, Ts...>>{lhs, rhs}; }
 	template <ExprType exprType, typename... Ts>
-	constexpr auto operator-(const Expression<exprType, Ts...>& lhs, float rhs) { return lhs + Constant{-rhs}; }
+	constexpr auto operator-(const Expression<exprType, Ts...>& lhs, float rhs) { return Expression<ExprType::Difference, Expression<exprType, Ts...>, Constant>{lhs, rhs}; }
 	template <ExprType exprType, typename... Ts>
-	constexpr auto operator-(float lhs, const Expression<exprType, Ts...>& rhs) { return Constant{lhs} - rhs; }
+	constexpr auto operator-(float lhs, const Expression<exprType, Ts...>& rhs) { return Expression<ExprType::Difference, Constant, Expression<exprType, Ts...>>{lhs, rhs}; }
 	template <ExprType exprType, typename... Ts>
-	constexpr auto operator*(const Expression<exprType, Ts...>& lhs, float rhs) { return lhs * Constant{rhs}; }
+	constexpr auto operator*(const Expression<exprType, Ts...>& lhs, float rhs) { return Expression<ExprType::Product, Expression<exprType, Ts...>, Constant>{lhs, rhs}; }
 	template <ExprType exprType, typename... Ts>
-	constexpr auto operator*(float lhs, const Expression<exprType, Ts...>& rhs) { return Constant{lhs} * rhs; }
+	constexpr auto operator*(float lhs, const Expression<exprType, Ts...>& rhs) { return Expression<ExprType::Product, Constant, Expression<exprType, Ts...>>{lhs, rhs}; }
 	template <ExprType exprType, typename... Ts>
-	constexpr auto operator/(const Expression<exprType, Ts...>& lhs, float rhs) { return lhs / Constant{rhs}; }
+	constexpr auto operator/(const Expression<exprType, Ts...>& lhs, float rhs) { return Expression<ExprType::Quotient, Expression<exprType, Ts...>, Constant>{lhs, rhs}; }
 	template <ExprType exprType, typename... Ts>
-	constexpr auto operator/(float lhs, const Expression<exprType, Ts...>& rhs) { return Constant{lhs} / rhs; }
+	constexpr auto operator/(float lhs, const Expression<exprType, Ts...>& rhs) { return Expression<ExprType::Quotient, Constant, Expression<exprType, Ts...>>{lhs, rhs}; }
 
 
 
